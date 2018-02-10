@@ -56,3 +56,28 @@ MY_ID_VENTAS OUT INTEGER, MY_NUMERO_CLIENTE IN INTEGER, MY_NUMERO_VENDEDOR IN IN
 MY_MONTO IN FLOAT
 
 );
+
+--PROBAR EL POCEDIMIENTO
+DECLARE
+VALOR INTEGER;
+BEGIN
+GUARDAR_CALIFICACIONES(VALOR, 'JAVA 2',6);
+END;
+/
+--verificamos
+select * from calificaciones;--relacionado a un cursor explicito
+delete from calificaciones where id_calificacion=2;
+select count(*) from calificaciones; --relacionado a un cursor implicito
+
+--EJEMPLO DE CURSOR EXPLICITO CON LA TABLA CALIFICACIONES
+
+DECLARE
+CURSOR CUR_CALIF IS SELECT * FROM CALIFICACIONES;
+BEGIN
+  FOR REC IN CUR_CALIF LOOP
+   DBMS_OUTPUT.PUT_LINE('CALIFICACION '||REC.VALOR|| ' MATERIA '||REC.MATERIA);
+  END LOOP;
+END;
+  /
+  
+  SET SERVEROUTPUT ON;
